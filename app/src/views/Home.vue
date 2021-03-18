@@ -49,6 +49,13 @@
               v-model="price"
             />
           </div>
+          <div class="form-group">
+            <label for="imported">Imported</label>
+            <select class="form-control" v-model="imported">
+              <option>Imported</option>
+              <option>Not Imported</option>
+            </select>
+          </div>
           <div class="btn btn-primary" @click.prevent="addItem">Add to Cart</div>
         </form>
         <div class="col-8">
@@ -82,7 +89,8 @@ export default {
       name: '',
       category: '',
       price: 0,
-      quantity: 0
+      quantity: 0,
+      imported: ''
     }
   },
   methods: {
@@ -90,8 +98,9 @@ export default {
       const payload = {
         name: this.name,
         category: this.category,
-        price: Number(this.price).toFixed(2),
-        quantity: Number(this.price).toFixed(2)
+        price: Number(this.price),
+        quantity: Number(this.quantity),
+        imported: this.imported
       }
       for (const key in payload) {
         const element = payload[key]

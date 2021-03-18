@@ -9,6 +9,8 @@
           :key="index"
           :item="item"/>
       </div>
+      <h3>Sales Tax: {{Number(grandTotal - total).toFixed(2)}}</h3>
+      <h3>Total: {{Number(total).toFixed(2)}}</h3>
       <h2>Grand Total: {{Number(grandTotal).toFixed(2)}}</h2>
     </div>
   </div>
@@ -22,8 +24,9 @@ export default {
   data () {
     return {
       grandTotal: 0,
+      total: 0,
       tax: 0,
-      import: 0,
+      importDuty: 0,
       itemsFetched: false,
       showRec: false
     }
@@ -34,16 +37,20 @@ export default {
   methods: {
     calculateGrandTotal () {
       this.grandTotal = 0
+      this.total = 0
       this.tax = 0
-      this.import = 0
+      this.importDuty = 0
       this.items.forEach(element => {
-        if (element.category !== 'Other') {
-          this.tax = element.price * element.quantity * 0.1
-        } else {
-          this.tax = element.price * element.quantity * 0.05
+        if (element.category === 'Other') {
+          this.tax = Number(element.price * element.quantity * 0.1)
         }
-        this.import = element.price * element.quantity * 0.05
-        this.grandTotal += (element.price * element.quantity) + this.tax + this.import
+        if (element.imported === 'Imported') {
+          this.importDuty = Number(element.price * element.quantity * 0.05)
+        }
+        this.total += (element.price * element.quantity)
+        this.grandTotal += (element.price * element.quantity) + this.tax + this.importDuty
+        this.tax = 0
+        this.importDuty = 0
       })
     },
     showReceipt () {
