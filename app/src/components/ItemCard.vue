@@ -8,7 +8,7 @@
         <div>Price: {{item.price}}</div>
       </div>
       <div class="card-body">
-        <h5>Total: USD {{Number((item.price * item.quantity) + Math.ceil((Number(tax + importDuty) * 20 - 5) / 20)).toFixed(2)}}</h5>
+        <h5>Total: USD {{Number((item.price * item.quantity) + Math.round((Number(tax + importDuty) * 20)) / 20).toFixed(2)}}</h5>
         <div> price: {{Number(item.price*item.quantity).toFixed(2)}}</div>
         <div>+ tax: {{Number(tax).toFixed(2)}}</div>
         <div>+ import: {{Number(importDuty).toFixed(2)}}</div>
