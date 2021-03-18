@@ -48,7 +48,7 @@ export default {
           this.importDuty = Number(element.price * element.quantity * 0.05)
         }
         this.total += (element.price * element.quantity)
-        this.grandTotal += (element.price * element.quantity) + Math.round((Number(this.tax + this.importDuty) * 20)) / 20
+        this.grandTotal += (element.price * element.quantity) + Math.ceil((Number(this.tax + this.importDuty) * 20)) / 20
         this.tax = 0
         this.importDuty = 0
       })
