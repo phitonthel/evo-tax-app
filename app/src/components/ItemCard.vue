@@ -8,7 +8,7 @@
         <div>Price: {{item.price}}</div>
       </div>
       <div class="card-body">
-        <h5>Total: USD {{Number((item.price * item.quantity) + tax + importDuty).toFixed(2)}}</h5>
+        <h5>Total: USD {{Number((item.price * item.quantity) + Math.ceil((Number(tax + importDuty) * 20 - 5) / 20)).toFixed(2)}}</h5>
         <div> price: {{Number(item.price*item.quantity).toFixed(2)}}</div>
         <div>+ tax: {{Number(tax).toFixed(2)}}</div>
         <div>+ import: {{Number(importDuty).toFixed(2)}}</div>
@@ -29,7 +29,7 @@ export default {
   },
   created () {
     if (this.item.category === 'Other') {
-      this.tax = Number(this.item.price * this.item.quantity * 0.1)
+      this.tax = (this.item.price * this.item.quantity * 0.1)
     }
     if (this.item.imported === 'Imported') {
       this.importDuty = Number(this.item.price * this.item.quantity * 0.05)

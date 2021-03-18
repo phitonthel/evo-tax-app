@@ -42,13 +42,13 @@ export default {
       this.importDuty = 0
       this.items.forEach(element => {
         if (element.category === 'Other') {
-          this.tax = Number(element.price * element.quantity * 0.1)
+          this.tax = (element.price * element.quantity * 0.1)
         }
         if (element.imported === 'Imported') {
           this.importDuty = Number(element.price * element.quantity * 0.05)
         }
         this.total += (element.price * element.quantity)
-        this.grandTotal += (element.price * element.quantity) + this.tax + this.importDuty
+        this.grandTotal += (element.price * element.quantity) + Math.ceil((Number(this.tax + this.importDuty) * 20 - 5) / 20)
         this.tax = 0
         this.importDuty = 0
       })
